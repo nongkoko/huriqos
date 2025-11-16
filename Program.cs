@@ -15,14 +15,14 @@ for (int leIndex = 0; leIndex < argsClone.Length; leIndex++)
     });
 }
 var aParser = jomiunsCli.factory.newCliParser(argsClone);
-var h38745 = aParser.registerSatuan<int>("ambil nilai untuk satuan tertentu", "satuannya", "meter", "m", "tumbak");
+var h38745 = aParser.registerSatuan<string>("ambil nilai untuk satuan tertentu", "satuannya", "meter", "m", "tumbak");
 if (aParser.startParsing() is false)
     return;
 
 if (h38745.Results.Any())
 {
     var theSatuan = h38745.Results.First().matchedKeyword;
-    var valueDalamSatuan = h38745.Results.First().theResult;
+    var valueDalamSatuan = h38745.Results.First().theResult.reverseTerbilang();
     var valueDalamMeter = valueDalamSatuan; //default meter
 
     if (theSatuan.inThisButIgnoreCase("tumbak"))
