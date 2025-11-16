@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HuriQos": {
+      "commandName": "Project",
+      "commandLineArgs": "600 m 150 jeti"
+    }
+  }
+}

@@ -2,7 +2,19 @@
 using jomiunsExtensions;
 using System.Diagnostics;
 
-var aParser = jomiunsCli.factory.newCliParser(args);
+var argsClone = args.ToArray();
+for (int leIndex = 0; leIndex < argsClone.Length; leIndex++)
+{
+    var arg = argsClone[leIndex];
+    argsClone[leIndex] = arg.replacess(new
+    {
+        jt = "juta",
+        jeti = "juta",
+        rb = "ribu",
+        ribeng = "ribu",
+    });
+}
+var aParser = jomiunsCli.factory.newCliParser(argsClone);
 var h38745 = aParser.registerSatuan<int>("ambil nilai untuk satuan tertentu", "satuannya", "meter", "m", "tumbak");
 if (aParser.startParsing() is false)
     return;
@@ -29,7 +41,11 @@ Harga per meter: {hargaPerMeter:N0}" : $"Harga per meter: {hargaPerMeter:N0}")}"
 
 if (IsLaunchedFromCmd() is false)
 {
-    Console.WriteLine("Press any key to exit...");
+    Task.Run(async () => {
+        await Task.Delay(10000);
+        Environment.Exit(0);
+    });
+    Console.WriteLine("Press any key to exit... (otomatis dalam 10 detik)");
     Console.ReadKey();
 }
 
